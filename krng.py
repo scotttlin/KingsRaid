@@ -359,17 +359,17 @@ def get_conquest_run_time(conquest_chapter, longest_run_time):
 # Protection is in place if you have used up your keys.  This will then effectively click "open" and "x out" over and over, without clicking reset until the macro completes.
 def gen_single_conquest(conquest_chapter, longest_run_time):
 
-    nox.click_button('portal', 1000)
-    nox.click_button('conquests', 1000)
-    nox.click_button(conquest_chapter, 1000)
+    nox.click_button('portal', 2000)
+    nox.click_button('conquests', 2000)
+    nox.click_button(conquest_chapter, 2000)
     nox.click_button('move_to_conquest', 5000)  # map render delay
-    nox.click_button('prepare_battle', 1000)
-    nox.click_button('get_ready_for_battle', 1000)
-    nox.click_button('auto_repeat', 1000)
+    nox.click_button('prepare_battle', 2000)
+    nox.click_button('get_ready_for_battle', 2000)
+    nox.click_button('auto_repeat', 2000)
     nox.click_button('repeat_ok', (get_conquest_run_time(conquest_chapter, longest_run_time) * 1000 * 5))  # for now this will be 60s per run or 5 min total.  We can make this smarter later.
-    nox.click_button('insufficient_keys', 1000)
-    nox.click_button('x_out', 500)
-    nox.click_button('x_out', 500) # second x_out in case of key reset
+    nox.click_button('insufficient_keys', 2000)
+    nox.click_button('x_out', 1000)
+    nox.click_button('x_out', 1000) # second x_out in case of key reset
     nox.click_button('exit_conquest', 20000) # long render
         
 # Current runtime is 34.76 minutes.  In the future we'll allow the user to adjust their ch7 runtime.  Then scale off that for easier runs.
