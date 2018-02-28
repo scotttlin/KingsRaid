@@ -50,7 +50,26 @@ points = {
     'start_adventure' : (1055, 660),
     'stam_potion_select' : (641,379),
     'stam_potion_confirm' : (635,546),
-    'confirm_insufficient_members' : (635,546)
+    'confirm_insufficient_members' : (635,546),
+    
+    # Dailies
+    # Conquests
+    'portal' : (703, 656),
+    'conquests' : (938, 648),
+    'ch2_conquest' : (439, 275),
+    'ch3_conquest' : (853, 276),
+    'ch4_conquest' : (441, 355),
+    'ch5_conquest' : (845, 358),
+    'ch6_conquest' : (449, 436),
+    'ch7_conquest' : (840, 435),
+    'move_to_conquest' : (395, 532), # precise to avoid ruby reset
+    'prepare_battle' : (1189, 649),
+    'get_ready_for_battle' : (955, 654),
+    'auto_repeat' : (850, 664),
+    'repeat_ok' : (395, 532), # precise to avoid ruby reset
+    'insufficient_keys' : (395, 532), # precise to avoid ruby reset
+    'x_out' : (946, 170), # precise click to avoid unselecting heroes
+    'exit_conquest' : (1200, 628)
 }
 
 rects = {
@@ -225,7 +244,6 @@ def re_enter_adventure(use_potion):
     if use_potion:
         nox.click_loc((759, 558), 2000)      # Stamina Potion OK
 
-
 def gen_natural_stamina_farm():
     print()
     use_pot = nox.prompt_user_yes_no(
@@ -314,12 +332,68 @@ def gen_natural_stamina_farm():
         # Re-enter the battle from the world map, using a potion if necessary
         re_enter_adventure(use_pot)
 
+# reduce the time for easier conquests.  This assumes we're starting at ch7.  If we support less than all chapters then this will need to be adjusted.
+def get_conquest_run_time(conquest_chapter, longest_run_time):
+    run_time = longest_run_time
+
+    if conquest_chapter == "ch2_conquest":
+        run_time = longest_run_time - 35
+    elif conquest_chapter == "ch3_conquest":
+        run_time = longest_run_time - 30
+    elif conquest_chapter == 'ch4_conquest':
+        run_time = longest_run_time - 25
+    elif conquest_chapter == 'ch5_conquest':
+        run_time = longest_run_time - 20
+    elif conquest_chapter == 'ch6_conquest':
+        run_time = longest_run_time - 15
+    elif conquest_chapter == 'ch7_conquest':
+        run_time = longest_run_time
+
+    # establish a minimum
+    if run_time >= 45:
+        return run_time
+    else:
+        return longest_run_time
+
+# auto conquest on one chapter
+# Protection is in place if you have used up your keys.  This will then effectively click "open" and "x out" over and over, without clicking reset until the macro completes.
+def gen_single_conquest(conquest_chapter, longest_run_time):
+
+    nox.click_button('portal', 1000)
+    nox.click_button('conquests', 1000)
+    nox.click_button(conquest_chapter, 1000)
+    nox.click_button('move_to_conquest', 5000)  # map render delay
+    nox.click_button('prepare_battle', 1000)
+    nox.click_button('get_ready_for_battle', 1000)
+    nox.click_button('auto_repeat', 1000)
+    nox.click_button('repeat_ok', (get_conquest_run_time(conquest_chapter, longest_run_time) * 1000 * 5))  # for now this will be 60s per run or 5 min total.  We can make this smarter later.
+    nox.click_button('insufficient_keys', 1000)
+    nox.click_button('x_out', 500)
+    nox.click_button('x_out', 500) # second x_out in case of key reset
+    nox.click_button('exit_conquest', 20000) # long render
+        
+# Current runtime is 34.76 minutes.  In the future we'll allow the user to adjust their ch7 runtime.  Then scale off that for easier runs.
+# On a slower (cpu) laptop, the quickest one run can be is around 40s.  This starts with 90s per run.
+# Currently designed to work with chapters 2-7, not a partial of that.  Currently expects all keys available and no additional keys.
+def gen_conquest():
+    confirm(start_condition='The macro should be started only when the Portal button is visible')
+    longest_run_time = 90 # this is in seconds and should be requested from the user.  This should be how long it takes them to run ch7
+
+    gen_single_conquest('ch2_conquest', get_conquest_run_time('ch2_conquest', longest_run_time))
+    gen_single_conquest('ch3_conquest', get_conquest_run_time('ch3_conquest', longest_run_time))
+    gen_single_conquest('ch4_conquest', get_conquest_run_time('ch4_conquest', longest_run_time))
+    gen_single_conquest('ch5_conquest', get_conquest_run_time('ch5_conquest', longest_run_time))
+    gen_single_conquest('ch6_conquest', get_conquest_run_time('ch6_conquest', longest_run_time))
+    gen_single_conquest('ch7_conquest', get_conquest_run_time('ch7_conquest', longest_run_time))
+
+
 try:
     macro_generators = [
         ("NPC Gear Purchasing and Grinding", gen_grindhouse),
         ("AFK Raid (Member)", gen_raid),
         ("AFK Raid (Leader)", gen_raid_leader),
         ("Story Repeat w/ Natural Stamina Regen", gen_natural_stamina_farm),
+        ("Conquests (beta)", gen_conquest),
         ]
     if args.enable_developer_commands:
         macro_generators.extend([
