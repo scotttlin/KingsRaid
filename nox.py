@@ -62,7 +62,7 @@ def click_loc(loc, wait_milliseconds):
     # clicking a buy button with the game not really doing anything between each click, this can be very
     # low.  On the other hand, if a click causes the game to transition from one screen to another (e.g.
     # using a portal and the game having to load into Orvel and load an entirely new area) then it should
-    # be fairly high.
+    # be fairly high..
     wait(wait_milliseconds)
 
 def click_button(button, wait_milliseconds):
