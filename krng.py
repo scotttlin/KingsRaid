@@ -162,7 +162,7 @@ def gen_grindhouse():
             start_condition='The macro should be started from the forge shop')
 
     # Click on first item in forge shop
-    nox_click_button('forge_first_item', 1500)
+    nox.click_button('forge_first_item', 1500)
 
     # Buy 300 items
     for i in range(0, items_to_buy):
