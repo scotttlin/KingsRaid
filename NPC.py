@@ -24,13 +24,15 @@ def gen_grindhouse():
 										"Milliseconds (Default=325): ", default=325)
 
 	Common.confirm(properties={'Items to buy' : items_to_buy, 'Delay' : buy_delay },
-			start_condition='The macro should be started from the forge shop, with an item selected.')
+			start_condition='The macro should be started from the forge shop.')
+
+	# Click on first item in forge shop
+	nox.click_button('forge_first_item', 1500)
 
 	# Buy 300 items
 	for i in range(0, items_to_buy):
 		nox.click_button('buy', buy_delay)
-		nox.click_button('buy_confirm', buy_delay)
-
+		
 	# Exit twice (to Orvel map)
 	nox.click_button('exit', 1500)
 	nox.click_button('exit', 1500)
