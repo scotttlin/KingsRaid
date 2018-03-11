@@ -35,8 +35,8 @@ desc = None
 # These coordinate initial values are relative to a 1280x720 resolution, regardless of what
 # your actual resolution is.
 points = {
+    'forge_first_item': (615, 283),
 	'buy': (965, 652),
-	'buy_confirm': (787, 520),
 	'exit': (152, 32),
 	'inventory' : (178, 644),
 	'grind' : (839,629),
@@ -104,6 +104,7 @@ def print_macro_details():
 		print('Destination Macro Name: {0}'.format(macro_name))
 	print('Destination File: {0}'.format(file_path))
 	print('Selected Macro: {0}'.format(desc))
+
 
 
 try:
