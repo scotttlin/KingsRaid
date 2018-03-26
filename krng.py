@@ -11,6 +11,7 @@ import Conquest
 import Campaign
 import Inventory
 import NPC
+import UpperDungeon
 
 print('Nox Macro Generator v2.1')
 print('By: cpp (Reddit: u/cpp_is_king, Discord: @cpp#0120)')
@@ -74,7 +75,17 @@ points = {
 	'repeat_ok' : (395, 532), # precise to avoid ruby reset
 	'insufficient_keys' : (395, 532), # precise to avoid ruby reset
 	'x_out' : (946, 170), # precise click to avoid unselecting heroes
-	'exit_conquest' : (1200, 628)
+	'exit_conquest' : (1200, 628),
+
+	# Upper Dungeon
+	'upper_dungeon' : (1048, 652),
+	'ch1_upper_dungeon' : (439, 275),
+	'ch2_upper_dungeon' : (853, 276),
+	'ch3_upper_dungeon' : (441, 355),
+	'ch4_upper_dungeon' : (845, 358),
+	'ch5_upper_dungeon' : (449, 436),
+	'ch6_upper_dungeon' : (840, 435),
+	'ch7_upper_dungeon' : (445, 520)
 }
 
 rects = {
@@ -114,6 +125,7 @@ try:
 		("AFK Raid (Leader)", DragonRaid.gen_raid_leader),
 		("Story Repeat w/ Natural Stamina Regen", Campaign.gen_natural_stamina_farm),
 		("Conquests (beta)", Conquest.gen_conquest),
+		("Upper Dungeon (beta)", UpperDungeon.gen_upper_dungeon)
 		]
 	if args.enable_developer_commands:
 		macro_generators.extend([
