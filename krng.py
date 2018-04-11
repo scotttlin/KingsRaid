@@ -116,6 +116,10 @@ def print_macro_details():
 	print('Destination File: {0}'.format(file_path))
 	print('Selected Macro: {0}'.format(desc))
 
+def conquest_plus_upper_dungeon():
+	Conquest.gen_conquest()
+	nox.time += 15000 # sleep for 15s in between
+	UpperDungeon.gen_upper_dungeon()
 
 
 try:
@@ -125,7 +129,8 @@ try:
 		("AFK Raid (Leader)", DragonRaid.gen_raid_leader),
 		("Story Repeat w/ Natural Stamina Regen", Campaign.gen_natural_stamina_farm),
 		("Conquests (beta)", Conquest.gen_conquest),
-		("Upper Dungeon (beta)", UpperDungeon.gen_upper_dungeon)
+		("Upper Dungeon (beta)", UpperDungeon.gen_upper_dungeon),
+		("Conquest + Upper Dungeon combo (beta)", conquest_plus_upper_dungeon)
 		]
 	if args.enable_developer_commands:
 		macro_generators.extend([
