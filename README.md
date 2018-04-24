@@ -1,6 +1,6 @@
 # KingsRaid
 
-**About**
+## About
 
 `krng.py` and `nox.py` constitute a program that can generate macros that can be used with Nox.  It's important to understand that this program is not -- itself -- a macro.  It does not interact with Nox or King's Raid.  It does not click anything.  Instead, this program *creates* macros that Nox understands.  Think of it as doing the equivalent of opening your Macro recorder in Nox, clicking around a bunch of times, and saving the Macro.  If you do that in Nox, Nox saves a file to your disk that contains instructions that it processes every time you click the play button to run the macro.  All this program is doing is outputting that same file.
 
@@ -16,7 +16,7 @@ This is a good question.  This is helpful for several reasons.
 
 4. It's open source, so people can contribute.  Instead of you making a macro that works for you only, if someone has a good idea and I can implement it, the entire community benefits, not just 1 person.
 
-**Instructions**
+## Instructions
 
 1. Download and unzip the script files via the "clone and download" link.
 
@@ -29,3 +29,20 @@ This is a good question.  This is helpful for several reasons.
 5. Profit!
 
 Patches welcome.  Do not use the experimental macros unless you know what you're doing, or maybe you want to help me develop them.  That's just my testbed for new ideas.
+
+## Troubleshooting
+
+### Mac issues
+
+1. You may run across a syntax issue or the script complaining about the version number even after installing the latest Python version.  If you do, open a command prompt and execute Python to see what version you have.  If it's a 2.x version then that means you [cannot change the default Python version](https://stackoverflow.com/questions/1687357/updating-python-on-mac#1687456).  To work around this, in your command prompt, run Python3 instead and direct it to the krng.py file as the first parameter:
+
+if you are in the directory of the scripts
+```
+Python3 krng.py
+```
+or here's an example with a full path
+```
+Python3 C:\download\scripts\krng.py
+```
+
+
