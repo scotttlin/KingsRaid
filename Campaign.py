@@ -17,7 +17,7 @@ def prompt_inventory_management_properties():
 def do_generate_inventory_management_for_adventure(should_grind, should_sell):
 	# At this point we're at the victory screen.  We need to click the Inventory button on the
 	# left side.  This involves a loading screen and can take quite some time, so wait 15 seconds.
-	nox.click_loc((80, 230), 15000)
+	nox.click_loc((80, 230), 25000)
 
 	Inventory.manage_inventory(should_grind, should_sell)
 
