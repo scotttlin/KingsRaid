@@ -57,7 +57,7 @@ points = {
 	'stam_potion_select' : (641,379),
 	'stam_potion_confirm' : (635,546),
 	'confirm_insufficient_members' : (635,546),
-	
+
 	# Dailies
 	# Conquests
 	'portal' : (703, 656),
@@ -124,7 +124,7 @@ def conquest_plus_upper_dungeon():
 
 try:
 	macro_generators = [
-		#("NPC Gear Purchasing and Grinding", gen_grindhouse),
+		("NPC Gear Purchasing and Grinding", NPC.gen_grindhouse),
 		("AFK Raid (Member)", DragonRaid.gen_raid),
 		("AFK Raid (Leader)", DragonRaid.gen_raid_leader),
 		("Story Repeat w/ Natural Stamina Regen", Campaign.gen_natural_stamina_farm),
