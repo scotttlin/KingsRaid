@@ -77,7 +77,7 @@ def gen_natural_stamina_farm():
 		nox.click_loc((503, 352), 500)	  # Continue (game pauses sometimes mid-battle)
 
 		nox.click_loc((1204, 494), 500)	 # Retry
-		nox.click_loc((572, 467), 500)	  # Single Repeat button.  Careful not to click the button that
+		nox.click_loc((572, 521), 500)	  # Single Repeat button.  Careful not to click the button that
 											# edits the count of stamina potions to use.
 		if use_pot:
 			nox.click_loc((759, 558), 500)	  # Stamina Potion OK
